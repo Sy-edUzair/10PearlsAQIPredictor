@@ -1,6 +1,7 @@
 # 🌍 Karachi Pearls AQI Predictor
 
 An end-to-end machine learning system for predicting Air Quality Index (AQI) in Karachi, Pakistan using multi-horizon forecasting with LightGBM.
+<img width="1575" height="891" alt="image" src="https://github.com/user-attachments/assets/b0eba23f-dd56-4f9a-9c13-8c5e6de2db09" />
 
 ## 📋 Overview
 
