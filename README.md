@@ -66,9 +66,9 @@ lgbm         11.752731 9.176450 0.771479
 
 Out which LightGBM was the best, hence it was trained on an holdout evaluation with a temporal split. The final LightGBM MultiOutput model achieves:
 
-**aqi_24** (24 hour forecast): RMSE=19.128, MAE=12.321, R²=0.746 &nbsp;
-**aqi_48** (48 hour forecast): RMSE=22.074, MAE=15.418, R²=0.641 &nbsp;
-**aqi_72** (72 hour forecast): RMSE=22.392, MAE=16.368, R²=0.611 &nbsp;
+**aqi_24** (24 hour forecast): RMSE=19.128, MAE=12.321, R²=0.746 <br>
+**aqi_48** (48 hour forecast): RMSE=22.074, MAE=15.418, R²=0.641 <br>
+**aqi_72** (72 hour forecast): RMSE=22.392, MAE=16.368, R²=0.611 <br>
 
 ## 🔧 Technical Stack
 
