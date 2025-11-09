@@ -102,4 +102,4 @@ For questions or collaboration opportunities, please open an issue in the reposi
 
 ---
 
-**Note**: See `REPORT.md` for detailed methodology, experiments, and research findings.
+**Note**: See `Syed Uzair Hussain - AQIPredictor Report` for detailed methodology, experiments, and research findings.
