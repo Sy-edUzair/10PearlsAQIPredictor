@@ -1,0 +1,13 @@
+gradio
+lightgbm
+hopsworks==4.2.*
+scikit-learn
+pandas
+numpy
+joblib
+requests
+meteostat
+matplotlib
+tqdm
+Pillow
+sys

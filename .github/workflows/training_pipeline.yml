@@ -1,0 +1,21 @@
+# .github/workflows/train_pipeline.yml
+name: Daily Training Pipeline
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # midnight UTC
+  workflow_dispatch:
+
+jobs:
+  train_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Run training pipeline
+        env:
+          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+        run: python pearlsaqipredictor.py --task train
