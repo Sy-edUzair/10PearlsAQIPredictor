@@ -18,4 +18,4 @@ jobs:
       - name: Run training pipeline
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
-        run: python pearlsaqipredictor.py --task train
+        run: python finalaqipredictor.py --task train
