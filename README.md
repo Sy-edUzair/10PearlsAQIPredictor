@@ -8,8 +8,8 @@ This project implements a production-ready AQI prediction system that forecasts 
 
 ## 🗂️ Project Structure
 
-- **`pearlsaqipredictor.py`** - Main experimental notebook containing EDA, model experimentation, and initial development
-- **`finalaqipredictor.py`** - Production workflow file with modular pipeline architecture for deployment
+- **`pearlsaqipredictor.py/PearlsAQIPredictor.ipynb`** - Main experimental notebook containing EDA, model experimentation, and initial development and everything. (THIS CONTAINS MAIN PROJECT LOGIC AND EVERYTHING)
+- **`finalaqipredictor.py`** - Production workflow file with modular pipeline architecture for deployment and github workflows.
 - **`requirements.txt`** - Python dependencies
 - **`.github/workflows/`** - CI/CD automation for feature and training pipelines
 
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ### Environment Variables
 
-Create a `.env` file or set the following:
+Create a `.env` file or set the following in COLAB:
 
 ```
 OPENWEATHER_API_KEY=your_api_key
@@ -41,6 +41,10 @@ HOPSWORKS_API_KEY=your_api_key
 
 ### Running Pipelines
 
+```bash
+  run PearlsAQIPredictor.ipynb (has everything)
+```
+OR 
 ```bash
 # Run feature pipeline (data collection & processing)
 python finalaqipredictor.py --task feature
@@ -53,12 +57,17 @@ python finalaqipredictor.py --task dashboard
 ```
 
 ## 📊 Model Performance
+The project trained 3 models on a TimeSeriesSplit. These were the average performances:
+       Model      RMSE      MAE       R2
+RandomForest 12.012505 9.331104 0.782127
+xgb          12.610045 9.813469 0.751713
+lgbm         11.752731 9.176450 0.771479
 
-The final LightGBM MultiOutput model achieves:
+Out which LightGBM was the best, hence it was trained on an holdout evaluation with a temporal split. The final LightGBM MultiOutput model achieves:
 
-- **24h Forecast**: RMSE ~12-15, MAE ~8-10, R² ~0.85
-- **48h Forecast**: RMSE ~15-18, MAE ~10-12, R² ~0.80
-- **72h Forecast**: RMSE ~18-22, MAE ~12-14, R² ~0.75
+**aqi_24** (24 hour forecast): RMSE=19.128, MAE=12.321, R²=0.746
+**aqi_48** (48 hour forecast): RMSE=22.074, MAE=15.418, R²=0.641
+**aqi_72** (72 hour forecast): RMSE=22.392, MAE=16.368, R²=0.611
 
 ## 🔧 Technical Stack
 
@@ -80,7 +89,7 @@ The final LightGBM MultiOutput model achieves:
 
 ## 🤝 Contributing
 
-This project was developed as part of the Karachi Pearls initiative for environmental monitoring.
+This project was developed as part of the 10Pearls Internship Program for the field of Data Sceience
 
 ## 📄 License
 
