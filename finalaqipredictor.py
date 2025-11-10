@@ -13,7 +13,6 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
     
 import requests, time, datetime as dt
-import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pandas as pd
