@@ -124,13 +124,14 @@ def fetch_weather_data(lat, lon, start=start, end=end):
     print(f"Weather Data fetched: {len(df_weather)} rows")
     return df_weather
 
-def fetch_lat_lon(city_name, api_key):
-    url = f"https://api.openweathermap.org/geo/1.0/direct?q={city_name}&limit=1&appid={api_key}"
-    res = requests.get(url).json()
-    if not res:
-        raise ValueError("City not found")
-    return res[0]["lat"], res[0]["lon"]
-
+def fetch_lat_lon(city_name, api_key=OPENWEATHER_API_KEY):
+  resp = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city_name}&limit=5&appid={api_key}")
+  if resp.status_code != 200:
+        raise Exception(f"API Error: {resp.text}")
+  lat = resp.json()[0]["lat"]
+  lon = resp.json()[0]["lon"]
+  return lat,lon
+     
 def merge_and_preprocess(df_aqi, df_weather):
     merged = pd.merge_asof(
         df_aqi.sort_values("timestamp"),
