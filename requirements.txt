@@ -10,4 +10,4 @@ meteostat
 matplotlib
 tqdm
 Pillow
-sys
+
