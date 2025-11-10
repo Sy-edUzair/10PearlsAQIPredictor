@@ -7,7 +7,15 @@ Original file is located at
     https://colab.research.google.com/drive/1SpoA1tOz23mCvdBvHWQagJZY0M31JIkP
 """
 
-from google.colab import userdata
+try:
+    from google.colab import userdata
+    OPENWEATHER_API_KEY = userdata.get("OPENWEATHER_API_KEY")
+    HOPSWORKS_API_KEY = userdata.get("HOPSWORKS_API_KEY")
+except ImportError:
+    import os
+    OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+    HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
+    
 import requests, time, datetime as dt
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -178,7 +186,7 @@ def add_lags(df, col="aqi"):
     df["no2_temp"] = df["no2"] * df["temp"]      # hot weather increases NO2 dispersion/reaction
     return df
 
-def save_to_feature_store(df,name,description,vers,api_key=userdata.get("HOPSWORKS_API_KEY")):
+def save_to_feature_store(df,name,description,vers,api_key=HOPSWORKS_API_KEY):
     project = hopsworks.login(api_key_value=api_key)
     fs = project.get_feature_store()
     fg = fs.get_or_create_feature_group(
@@ -191,20 +199,23 @@ def save_to_feature_store(df,name,description,vers,api_key=userdata.get("HOPSWOR
     print("Saved features to Hopsworks Feature Store")
 
 def load_from_feature_store(name="aqi_feature", version=1):
-    project = hopsworks.login(api_key_value=userdata.get("HOPSWORKS_API_KEY"))
+    project = hopsworks.login(api_key_value=HOPSWORKS_API_KEY)
     fs = project.get_feature_store()
-    fg = fs.get_feature_group("aqi_feature", version=1)
+    fg = fs.get_feature_group(name, version=version)
     if fg:
-      df = fg.read()
-      df = df.set_index('timestamp')
-      df.index = pd.to_datetime(df.index)
-      df = df.sort_index()
+        df = fg.read()
+        df = df.set_index('timestamp')
+        df.index = pd.to_datetime(df.index)
+        df = df.sort_index()
+        return df  
     else:
-      print("No DataFrame Fetched!")
+        print("No DataFrame Fetched!")
+        return pd.DataFrame()
+
 
 def run_feature_pipeline():
     print("Running Feature Pipeline...")
-    lat, lon = fetch_lat_lon("Karachi", userdata.get("OPENWEATHER_API_KEY"))
+    lat, lon = fetch_lat_lon("Karachi", OPENWEATHER_API_KEY)
     print(f"Fetched coordinates: {lat}, {lon}")
 
     df_aqi = fetch_aqi_history_data(lat,lon)
@@ -224,7 +235,7 @@ def run_feature_pipeline():
     df = create_features(df)
     df = add_lags(df)
     df = df.reset_index()
-    save_to_feature_store(df,"aqi_feature","Features for AQI prediction",1,userdata.get("HOPSWORKS_API_KEY"))
+    save_to_feature_store(df,"aqi_feature","Features for AQI prediction",1,HOPSWORKS_API_KEY)
     print("Feature pipeline completed.")
 
 def create_targets_full(df):
