@@ -220,9 +220,12 @@ def run_feature_pipeline():
     df_weather.replace(-9999, np.nan, inplace=True)
 
     df = merge_and_preprocess(df_aqi, df_weather)
+    df['us_aqi'] = df.apply(get_aqi_us, axis=1)
     df = df.set_index('timestamp')
     df.index = pd.to_datetime(df.index)
     df = df.resample("1H").asfreq()
+    features_to_drop = ['co', 'nh3','no','o3','hour', 'dayofweek', 'month']
+    df=df.drop(columns=features_to_drop)
     df.to_csv("history_aqi.csv", index=False, encoding="utf-8")
     print(f"Saved data to history_aqi.csv")
 
