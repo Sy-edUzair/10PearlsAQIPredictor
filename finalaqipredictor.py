@@ -7,26 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1SpoA1tOz23mCvdBvHWQagJZY0M31JIkP
 """
 
-!pip install "hopsworks==4.2.*"
-
-!pip install requests matplotlib seaborn confluent-kafka shap xgboost tensorflow meteostat tqdm Pillow
-
-# Commented out IPython magic to ensure Python compatibility.
-# %%writefile requirements.txt
-# gradio
-# lightgbm
-# hopsworks==4.2.*
-# scikit-learn
-# pandas
-# numpy
-# joblib
-# requests
-# meteostat
-# matplotlib
-# tqdm
-# Pillow
-# sys
-
 from google.colab import userdata
 import requests, time, datetime as dt
 import seaborn as sns
@@ -534,7 +514,7 @@ if __name__ == "__main__":
     else:
         print("ℹPlease specify a task. Example: python pearlsaqipredictor.py --task train")
 
-!mkdir -p .github/workflows
+#!mkdir -p .github/workflows
 
 # Commented out IPython magic to ensure Python compatibility.
 # %%writefile .github/workflows/feature_pipeline.yml
