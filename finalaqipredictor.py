@@ -92,7 +92,7 @@ BASE_URL = "http://api.openweathermap.org/data/2.5/air_pollution"
 end = int(time.time())
 start = end - (1000*24*3600)
 
-def fetch_aqi_history_data(lat,lon,start=start, end=end, api_key=API_KEY):
+def fetch_aqi_history_data(lat,lon,start=start, end=end, api_key=OPENWEATHER_API_KEY):
     url = f"{BASE_URL}/history?lat={lat}&lon={lon}&start={start}&end={end}&appid={api_key}"
     resp = requests.get(url)
     resp.raise_for_status()
