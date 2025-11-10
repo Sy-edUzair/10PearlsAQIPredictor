@@ -1,6 +1,6 @@
 gradio
 lightgbm
-hopsworks==4.2.*
+hopsworks[python]==4.2.*
 scikit-learn
 pandas
 numpy
