@@ -225,14 +225,14 @@ def run_feature_pipeline():
     df = df.set_index('timestamp')
     df.index = pd.to_datetime(df.index)
     df = df.resample("1H").asfreq()
-    features_to_drop = ['co', 'nh3','no','o3','hour', 'dayofweek', 'month']
-    df=df.drop(columns=features_to_drop)
-    df=df.dropna()
     df.to_csv("history_aqi.csv", index=False, encoding="utf-8")
     print(f"Saved data to history_aqi.csv")
 
     df = create_features(df)
     df = add_lags(df)
+    features_to_drop = ['co', 'nh3','no','o3','hour', 'dayofweek', 'month']
+    df=df.drop(columns=features_to_drop)
+    df=df.dropna()
     df = df.reset_index()
     save_to_feature_store(df,"aqi_feature","Features for AQI prediction",1,HOPSWORKS_API_KEY)
     print("Feature pipeline completed.")
