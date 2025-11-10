@@ -7,14 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/1SpoA1tOz23mCvdBvHWQagJZY0M31JIkP
 """
 
-try:
-    from google.colab import userdata
-    OPENWEATHER_API_KEY = userdata.get("OPENWEATHER_API_KEY")
-    HOPSWORKS_API_KEY = userdata.get("HOPSWORKS_API_KEY")
-except ImportError:
-    import os
-    OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
-    HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
+
+import os
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+HOPSWORKS_API_KEY = os.getenv("HOPSWORKS_API_KEY")
     
 import requests, time, datetime as dt
 import seaborn as sns
