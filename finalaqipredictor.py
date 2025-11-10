@@ -32,8 +32,6 @@ SCALER_PATH = "scaler.pkl"
 PT_X_PATH = "feature_power_transformer.pkl"
 PT_Y_PATH = "target_power_transformer.pkl"
 
-API_KEY = userdata.get("OPENWEATHER_API_KEY")
-
 def get_aqi_us(components):
     # Pollutant concentration breakpoints (in μg/m³) from the openweather table
     POLLUTANT_CONCENTRATIONS = {
